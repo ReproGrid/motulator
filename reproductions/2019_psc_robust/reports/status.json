@@ -49,7 +49,8 @@
     }
   ],
   "misconduct_allegation": null,
-  "report_sha256": "4f8dc5c333c829bb7252a93d0aaf2ca8e8589059a32ec8d89f43dc78e1236902",
+  "report_sha256": "6eff8a94d394ffc78cc8f0fa2cedc9b17a2e1d9640c2cd6288443d8e32ccb179",
   "primary_manifest_sha256": "218a5a12486ed5821b8c0d4febecc858465d4c18e6b8c4133d27814ba0693550",
-  "fig5_condition_comparison_sha256": "9a38e41d0634f24a3970f2028c22e9b1821dcb74470eeaca8f27c25b0f6d7695"
+  "fig5_condition_comparison_sha256": "9a38e41d0634f24a3970f2028c22e9b1821dcb74470eeaca8f27c25b0f6d7695",
+  "fig5_ieee_comparison_sha256": "b902305d03a57d8732464128ce0746a3d37994a8a65b0e348103df89bdb38ee1"
 }

@@ -45,9 +45,20 @@ Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`�
 
 ### IEEE 最终出版版与勘误核查
 
-- **最终出版版图面。** 2026-11-11（UTC）访问了 IEEE Xplore 的第 8490668 号文章（第 66 卷第 8 期，5810–5819 页）。Figures 栏显示需登录查看，PDF 控件也提示当前会话无权访问，公开预览未提供可读的 Fig. 5 图面。最终版上排的电流标注和曲线是否仍存在符号差异，尚待直接核对。上述拟合、裕度和灵敏度均以 Aalto 作者稿为图面依据。[IEEE Xplore 文章](https://ieeexplore.ieee.org/document/8490668) · [Figures 栏](https://ieeexplore.ieee.org/document/8490668/figures) · [Aalto 作者稿 PDF](https://aaltodoc.aalto.fi/server/api/core/bitstreams/c8da5953-833c-4f32-b38b-49ea7add52b9/content)
-- **勘误记录。** 同日查询 DOI `10.1109/TIE.2018.2874584`。Crossref 记录的 `relation` 为空，也未返回 `update-to` 或 `updated-by`。使用 `updates:` 按原文 DOI 反查得到 `total-results = 0`。Crossmark 显示该 DOI 的状态数据不可用。以论文全名或 DOI 配合 `erratum`、`corrigendum`、`corrections` 检索，未查到针对本文的公开勘误。结论限于本次能查到的公开记录。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
-- **图面判据。** 读取上排图注的 `iq0`，并在上排直流侧子图沿 SCR=10 的实线找到非零负实轴交点。正号工况预测交点约为 `−0.334 pu`，负号工况约为 `−0.267 pu`。SCR=3 电感取整只作用于虚线工况，因此这个实线交点可单独区分符号。作者稿实线交点约为 `−0.267 pu`。这些坐标可用于获得最终版图面后的核对。[作者稿矢量结果](../verification/fig5_vector_comparison.json) · [四工况数值对照](../results/fig5_condition_comparison.csv)
+- **最终出版版图面。** 2026-11-11（UTC）通过 IEEE Xplore 文章 8490668 的 Figures 栏取得发布者原尺寸 GIF（820 × 766 像素）。两张上排子图的图内标注均为 `id0 = 0.95 pu`、`iq0 = +0.20 pu`。图注指定实线对应 SCR=10。出版版图面的量取使用该 GIF，作者稿矢量分析仍使用 Aalto PDF。[IEEE Xplore 文章](https://ieeexplore.ieee.org/document/8490668) · [Figures 栏](https://ieeexplore.ieee.org/document/8490668/figures) · [官方原图](https://ieeexplore.ieee.org/mediastore/IEEE/content/media/41/8678530/8490668/harne5-2874584-large.gif)
+- **SCR=10 实线交点。** 上排直流侧子图的实轴上，`0` 和 `−0.5` 刻度中心分别位于第 814.5 和 721.5 列。沿实线读到交点中心约第 765 列，换算为 `-0.266 pu`，增益裕度约为 `3.76` 倍。正号模型预测 `−0.334 pu`，负号模型预测 `−0.267 pu`。SCR=3 电感调整作用于虚线，因此此处的实线交点可单独区分符号。[出版版量取数据](../verification/fig5_ieee_comparison.json)
+- **整条轨迹核对。** 以上排标出的实轴和虚轴刻度换算像素坐标，分别取有功和直流侧子图内的 1818、1618 个蓝色像素中心，计算它们到对应工况下三个 SCR 计算轨迹的最近距离。两张图均明显支持负号，和作者稿矢量核对一致。像素误差包含线宽与抗锯齿误差，`L = 0.33 pu` 的主要依据仍是作者稿矢量结果。[出版版量取脚本](../src/compare_fig5_ieee.py) · [作者稿矢量结果](../verification/fig5_vector_comparison.json)
+
+| 上排工况 | 有功环 RMS (pu) | 直流侧环 RMS (pu) |
+|---|---:|---:|
+| 按图面标注 | 0.03740 | 0.04411 |
+| 仅变号 | 0.00569 | 0.00511 |
+| 仅调整电感 | 0.03757 | 0.04405 |
+| 变号并调整电感 | 0.00560 | 0.00510 |
+
+出版版保留了标注与曲线之间的符号差异。第 V-B 节以 SCR=3 灵敏度峰值最低解释直流电压响应，这项频域解释得到负号工况和出版版曲线的支持。原始绘图输入仍待作者确认。
+
+**勘误记录。** 同日查询 DOI `10.1109/TIE.2018.2874584`。Crossref 记录的 `relation` 为空，也未返回 `update-to` 或 `updated-by`。用 `updates:` 按原文 DOI 反查得到 `total-results = 0`。Crossmark 显示该 DOI 的状态数据不可用。以论文全名或 DOI 配合 `erratum`、`corrigendum`、`corrections` 检索，未查到针对本文的公开勘误。结论限于本次能查到的公开记录。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
 
 ## Fig. 7–8 的 VSM 对照
 
