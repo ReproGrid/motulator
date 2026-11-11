@@ -25,7 +25,7 @@ Harnefors、Hinkkanen、Riaz、Rahman 与 Zhang，*Robust Analytic Design of Pow
 
 ## Fig. 5 参数标注与曲线的差异
 
-Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`。按式 (8)，正号对应吸收无功，负号对应注入无功。上排六条原图矢量曲线与 `iq0 = −0.2` 更吻合。虚线另与 `L = 0.33 pu` 更吻合，对应有效 SCR 约 3.0303。先单独变号和单独取整，再组合测试，四套输入均有独立状态空间核对。组合后十二条轨迹的最大逐曲线 RMS 距离为 **1.48e-05 pu**。在相同的曲线一致电感下，仅改符号就使上排六条曲线的 RMS 距离至少缩小 **514 倍**。证据限于所核对的 Aalto 稿件和测试的参数假设，作者绘图输入及最终出版版图面仍待确认。[PDF 矢量核对](../verification/fig5_vector_comparison.json) · [四套参数与数值结果](../results/fig5_condition_comparison.csv)
+Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`。按式 (8)，正号对应吸收无功，负号对应注入无功。上排六条原图矢量曲线与 `iq0 = −0.2` 更吻合。虚线另与 `L = 0.33 pu` 更吻合，对应有效 SCR 约 3.0303。先单独变号和单独取整，再组合测试，四套输入均有独立状态空间核对。组合后十二条轨迹的最大逐曲线 RMS 距离为 **1.48e-05 pu**。在相同的曲线一致电感下，仅改符号就使上排六条曲线的 RMS 距离至少缩小 **514 倍**。拟合证据对应所核对的 Aalto 稿件及上述参数假设，作者绘图输入仍待确认。[PDF 矢量核对](../verification/fig5_vector_comparison.json) · [四套参数与数值结果](../results/fig5_condition_comparison.csv)
 
 上排各单元格为图注工况 / 曲线反推工况。最后一列追加从 PDF 线段估计的灵敏度峰值。
 
@@ -42,6 +42,12 @@ Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`�
 ![Fig. 5 图注与曲线反推工况的 Nyquist 叠图](../figures/fig5_parameter_overlay.png)
 
 ![Fig. 5 上排直流侧裕度与灵敏度峰值](../figures/fig5_robustness_comparison.png)
+
+### IEEE 最终出版版与勘误核查
+
+- **最终出版版图面。** 2026-11-11（UTC）访问了 IEEE Xplore 的第 8490668 号文章（第 66 卷第 8 期，5810–5819 页）。Figures 栏显示需登录查看，PDF 控件也提示当前会话无权访问，公开预览未提供可读的 Fig. 5 图面。最终版上排的电流标注和曲线是否仍存在符号差异，尚待直接核对。上述拟合、裕度和灵敏度均以 Aalto 作者稿为图面依据。[IEEE Xplore 文章](https://ieeexplore.ieee.org/document/8490668) · [Figures 栏](https://ieeexplore.ieee.org/document/8490668/figures) · [Aalto 作者稿 PDF](https://aaltodoc.aalto.fi/server/api/core/bitstreams/c8da5953-833c-4f32-b38b-49ea7add52b9/content)
+- **勘误记录。** 同日查询 DOI `10.1109/TIE.2018.2874584`。Crossref 记录的 `relation` 为空，也未返回 `update-to` 或 `updated-by`。使用 `updates:` 按原文 DOI 反查得到 `total-results = 0`。Crossmark 显示该 DOI 的状态数据不可用。以论文全名或 DOI 配合 `erratum`、`corrigendum`、`corrections` 检索，未查到针对本文的公开勘误。结论限于本次能查到的公开记录。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
+- **图面判据。** 读取上排图注的 `iq0`，并在上排直流侧子图沿 SCR=10 的实线找到非零负实轴交点。正号工况预测交点约为 `−0.334 pu`，负号工况约为 `−0.267 pu`。SCR=3 电感取整只作用于虚线工况，因此这个实线交点可单独区分符号。作者稿实线交点约为 `−0.267 pu`。这些坐标可用于获得最终版图面后的核对。[作者稿矢量结果](../verification/fig5_vector_comparison.json) · [四工况数值对照](../results/fig5_condition_comparison.csv)
 
 ## Fig. 7–8 的 VSM 对照
 
