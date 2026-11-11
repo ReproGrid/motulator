@@ -1,0 +1,16 @@
+{
+  "stage": "first Fig. 5 variant verification",
+  "checks": {
+    "printed_baseline_matches": true,
+    "independent_frequency_responses_match": true,
+    "independent_margins_sensitivity_and_poles_match": true,
+    "independent_equilibria_and_jacobians_pass": true,
+    "sign_only_improves_all_six_upper_curves": false,
+    "combined_inputs_match_all_twelve_paper_curves": true,
+    "curve_inferred_linear_nonlinear_and_solver_checks_pass": true
+  },
+  "nominal_inductance_sign_only_min_rms_improvement_factor": 12.618683874232895,
+  "correction": "The initial 100x gate was applied at nominal inductance, where the dashed curve still contains the independently measured SCR=3 rounding discrepancy. The final gate tests the sign at fixed curve-consistent inductance and separately requires improvement on all six upper traces at exact 1/SCR.",
+  "physical_inputs_changed": false,
+  "primary_or_independent_numerical_tolerances_changed": false
+}
