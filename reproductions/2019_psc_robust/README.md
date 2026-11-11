@@ -13,9 +13,9 @@
 
 ## IEEE 最终出版版与勘误
 
-2026-11-11（UTC）检查了 IEEE Xplore 的第 8490668 号文章。公开记录可见，Figures 栏和 PDF 均需有权限的账号。最终版 Fig. 5 的图注和曲线尚未直接核实，当前符号结论对应 Aalto 同行评审作者稿。[IEEE Xplore 文章](https://ieeexplore.ieee.org/document/8490668) · [Figures 栏](https://ieeexplore.ieee.org/document/8490668/figures) · [作者稿 PDF](https://aaltodoc.aalto.fi/server/api/core/bitstreams/c8da5953-833c-4f32-b38b-49ea7add52b9/content)
+2026-11-11（UTC）核对了 IEEE Xplore 文章 8490668 的官方 Fig. 5 原图。**符号差异在出版版仍存在。** 两张上排子图都标 `(id0, iq0) = (0.95, +0.20) pu`，但蓝色轨迹整体更吻合 `iq0 = −0.20 pu`。上排直流侧 SCR=10 实线的负实轴交点读值约为 `−0.266 pu`，正号模型预测 `−0.334 pu`，负号模型预测 `−0.267 pu`。仅变号即可让两张上排子图的像素拟合 RMS 误差分别降低约 6.6 倍和 8.6 倍。[IEEE Xplore Figures](https://ieeexplore.ieee.org/document/8490668/figures) · [官方原图](https://ieeexplore.ieee.org/mediastore/IEEE/content/media/41/8678530/8490668/harne5-2874584-large.gif) · [出版版量取数据](verification/fig5_ieee_comparison.json)
 
-截至该日未查到公开登记的关联勘误。Crossref 的 DOI 记录没有关联更新，反查更新条目返回 0，Crossmark 未提供该 DOI 的状态数据。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
+截至该日未查到公开登记的关联勘误。Crossref 的 DOI 记录没有关联更新，反查返回 0 条，Crossmark 未提供该 DOI 的状态数据。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
 
 ## 符号差异影响的结论
 
@@ -65,4 +65,11 @@ printf '%s\n' "$out"
 "$py" -m pip install pymupdf==2.1
 "$py" "$case_dir/verification/compare_fig5_manuscript.py" \
   --pdf /path/to/robust_psc2019.pdf --out "$run_dir/fig5-vector-check.json"
+```
+
+用从 IEEE Xplore Figures 栏保存的原尺寸 GIF 复跑出版版量取。脚本会检查原图的 SHA-256。仓库保存了量取数据和脚本。[出版版量取脚本](src/compare_fig5_ieee.py)
+
+```sh
+"$py" "$case_dir/src/compare_fig5_ieee.py" \
+  --artwork /path/to/harne5-2874584-large.gif --output "$run_dir/fig5-ieee-check.json"
 ```
