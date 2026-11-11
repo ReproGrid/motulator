@@ -56,6 +56,8 @@ Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`�
 | 仅调整电感 | 0.03757 | 0.04405 |
 | 变号并调整电感 | 0.00560 | 0.00510 |
 
+**整篇最终版 PDF 复核。** 本地下载文件共 10 页，Fig. 5 位于 PDF 第 5 页（期刊印刷页 5814）。逐项核对了两排电流标注与三种 SCR 线型，并从 PDF 提取了 12 条矢量轨迹。以各自标示的轴刻度换算后，官网 GIF 四个子图的蓝色像素中心到 PDF 轨迹的最近距离 RMS 为 `0.00511–0.00560 pu`，最大距离为 `0.01498 pu`。两种图面在 GIF 分辨率下相符。PDF 上排直流侧 SCR=10 实线交点为 `-0.26663 pu`，与 GIF 读值仅差 `0.00050 pu`。[PDF 对照数据](../verification/fig5_ieee_pdf_comparison.json) · [PDF 对照脚本](../src/compare_fig5_ieee_pdf.py)
+
 出版版保留了标注与曲线之间的符号差异。第 V-B 节以 SCR=3 灵敏度峰值最低解释直流电压响应，这项频域解释得到负号工况和出版版曲线的支持。原始绘图输入仍待作者确认。
 
 **勘误记录。** 同日查询 DOI `10.1109/TIE.2018.2874584`。Crossref 记录的 `relation` 为空，也未返回 `update-to` 或 `updated-by`。用 `updates:` 按原文 DOI 反查得到 `total-results = 0`。Crossmark 显示该 DOI 的状态数据不可用。以论文全名或 DOI 配合 `erratum`、`corrigendum`、`corrections` 检索，未查到针对本文的公开勘误。结论限于本次能查到的公开记录。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
