@@ -50,7 +50,7 @@ def compare(run, config):
     return result
 
 
-def fig5_variant_section(comparison, reference, ieee):
+def fig5_variant_section(comparison, reference, ieee, ieee_pdf):
     printed_key = "figure_labels"
     inferred_key = "flip_upper_iq_and_round_scr3_inductance"
     printed, inferred = (comparison["cases"][key] for key in (printed_key, inferred_key))
@@ -89,6 +89,12 @@ def fig5_variant_section(comparison, reference, ieee):
         ieee_rows.append(f"| {label} | {rms['gp']:.5f} | {rms['gd']:.5f} |")
     ieee_table = "\n".join(ieee_rows)
 
+    pdf_panels = list(ieee_pdf["artwork_pixel_to_pdf_vector_by_panel"].values())
+    pdf_rms = [panel["rms_distance_pu"] for panel in pdf_panels]
+    pdf_max = max(panel["max_distance_pu"] for panel in pdf_panels)
+    pdf_crossing = ieee_pdf["upper_gd_scr10_pdf_crossing_pu"]
+    crossing_difference = abs(pdf_crossing - ieee_crossing["real_pu"])
+
     return f"""## Fig. 5 参数标注与曲线的差异
 
 Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`。按式 (8)，正号对应吸收无功，负号对应注入无功。上排六条原图矢量曲线与 `iq0 = −0.2` 更吻合。虚线另与 `L = 0.33 pu` 更吻合，对应有效 SCR 约 3.0303。先单独变号和单独取整，再组合测试，四套输入均有独立状态空间核对。组合后十二条轨迹的最大逐曲线 RMS 距离为 **{verdict["max_combined_vector_rms_pu"]:.3g} pu**。在相同的曲线一致电感下，仅改符号就使上排六条曲线的 RMS 距离至少缩小 **{verdict["minimum_upper_rms_improvement_factor_from_sign_at_curve_inductance"]:.0f} 倍**。拟合证据对应所核对的 Aalto 稿件及上述参数假设，作者绘图输入仍待确认。[PDF 矢量核对](../verification/fig5_vector_comparison.json) · [四套参数与数值结果](../results/fig5_condition_comparison.csv)
@@ -117,6 +123,8 @@ Aalto 同行评审作者稿的 Fig. 5 上排标注 `(id0, iq0) = (0.95, +0.2)`�
 |---|---:|---:|
 {ieee_table}
 
+**整篇最终版 PDF 复核。** 本地下载文件共 {ieee_pdf["pdf_page_count"]} 页，Fig. 5 位于 PDF 第 {ieee_pdf["pdf_page_one_based"]} 页（期刊印刷页 {ieee_pdf["printed_page"]}）。逐项核对了两排电流标注与三种 SCR 线型，并从 PDF 提取了 {ieee_pdf["pdf_trace_count"]} 条矢量轨迹。以各自标示的轴刻度换算后，官网 GIF 四个子图的蓝色像素中心到 PDF 轨迹的最近距离 RMS 为 `{min(pdf_rms):.5f}–{max(pdf_rms):.5f} pu`，最大距离为 `{pdf_max:.5f} pu`。两种图面在 GIF 分辨率下相符。PDF 上排直流侧 SCR=10 实线交点为 `{pdf_crossing:.5f} pu`，与 GIF 读值仅差 `{crossing_difference:.5f} pu`。[PDF 对照数据](../verification/fig5_ieee_pdf_comparison.json) · [PDF 对照脚本](../src/compare_fig5_ieee_pdf.py)
+
 出版版保留了标注与曲线之间的符号差异。第 V-B 节以 SCR=3 灵敏度峰值最低解释直流电压响应，这项频域解释得到负号工况和出版版曲线的支持。原始绘图输入仍待作者确认。
 
 **勘误记录。** 同日查询 DOI `10.1109/TIE.2018.2874584`。Crossref 记录的 `relation` 为空，也未返回 `update-to` 或 `updated-by`。用 `updates:` 按原文 DOI 反查得到 `total-results = 0`。Crossmark 显示该 DOI 的状态数据不可用。以论文全名或 DOI 配合 `erratum`、`corrigendum`、`corrections` 检索，未查到针对本文的公开勘误。结论限于本次能查到的公开记录。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
@@ -132,6 +140,7 @@ def main():
     fig5_comparison = load("results/fig5_condition_comparison.json")
     fig5_reference = load("verification/fig5_vector_comparison.json")
     fig5_ieee = load("verification/fig5_ieee_comparison.json")
+    fig5_ieee_pdf = load("verification/fig5_ieee_pdf_comparison.json")
     fig8_independent = load("results/fig8_independent_comparison.json")
     cross = compare(run, config)
     independent_gates = [value for key,value in independent["gates"].items()
@@ -173,7 +182,7 @@ def main():
     error_refinement = max(r["DOP853_Radau_max_relative_to_step"] for r in run["local_steps"].values())
     checks = len(run["checks"])
     variant_checks = len(fig5_comparison["checks"])
-    sign_section = fig5_variant_section(fig5_comparison, fig5_reference, fig5_ieee)
+    sign_section = fig5_variant_section(fig5_comparison, fig5_reference, fig5_ieee, fig5_ieee_pdf)
     inferred_steps = fig5_comparison["curve_inferred_local_steps"]
     inferred_error = max(x["linear_nonlinear_max_relative_to_step"] for x in inferred_steps.values())
     inferred_refinement = max(x["DOP853_Radau_max_relative_to_step"] for x in inferred_steps.values())
@@ -256,7 +265,8 @@ Fig. 8 计算使用 5 s 的物理惯量和 1 rad/s 的阻尼滤波频率。有�
               "misconduct_allegation": None, "report_sha256": digest("reports/REPORT.md"),
               "primary_manifest_sha256": digest("results/run_manifest.json"),
               "fig5_condition_comparison_sha256": digest("results/fig5_condition_comparison.json"),
-              "fig5_ieee_comparison_sha256": digest("verification/fig5_ieee_comparison.json")}
+              "fig5_ieee_comparison_sha256": digest("verification/fig5_ieee_comparison.json"),
+              "fig5_ieee_pdf_comparison_sha256": digest("verification/fig5_ieee_pdf_comparison.json")}
     write("reports/status.json", status)
     print(json.dumps({"state": status["state"], "checks": checks+variant_checks, "cross_frequency_responses": cross["response_count"],
                       "cross_max_absolute_error": cross["max_absolute_complex_error"]}))

@@ -30,11 +30,23 @@ SOLID_CROSSING_ROW = 171
 SOLID_CROSSING_COLUMNS = (762, 768)
 
 
-def calibrated_strokes(blue, loop):
+def read_blue_artwork(path):
+    """Read the pinned web artwork and isolate blue curve pixels."""
+    artwork_hash = sha256(path.read_bytes()).hexdigest()
+    if artwork_hash != ARTWORK_SHA256:
+        raise ValueError("The artwork does not match the pinned IEEE Xplore Fig. 5 GIF")
+    with Image.open(path) as artwork:
+        if artwork.size != ARTWORK_SIZE:
+            raise ValueError("Unexpected artwork dimensions")
+        red, green, blue = np.asarray(artwork.convert("RGB"), dtype=int).transpose(2, 0, 1)
+    return (blue > 160) & (blue - red > 40) & (blue - green > 40), artwork_hash
+
+
+def calibrated_strokes(blue, loop, imaginary_ticks=IMAGINARY_TICKS):
     """Return interior blue-pixel centers in the plot's complex coordinates."""
     y, x = np.nonzero(blue)
     x_zero, x_minus_half = REAL_TICKS[loop]
-    y_zero, y_minus_point_two = IMAGINARY_TICKS
+    y_zero, y_minus_point_two = imaginary_ticks
     re = (x - x_zero) * 0.5 / (x_zero - x_minus_half)
     im = (y_zero - y) * 0.2 / (y_minus_point_two - y_zero)
     interior = (re > -1.49) & (re < -0.01) & (abs(im) < 0.735)
@@ -87,16 +99,10 @@ def main():
     )
     args = parser.parse_args()
 
-    artwork_hash = sha256(args.artwork.read_bytes()).hexdigest()
-    if artwork_hash != ARTWORK_SHA256:
-        parser.error("The artwork does not match the pinned IEEE Xplore Fig. 5 GIF")
-    with Image.open(args.artwork) as artwork:
-        if artwork.size != ARTWORK_SIZE:
-            parser.error("Unexpected artwork dimensions")
-        red, green, blue_channel = np.asarray(artwork.convert("RGB"), dtype=int).transpose(
-            2, 0, 1
-        )
-    blue = (blue_channel > 160) & (blue_channel - red > 40) & (blue_channel - green > 40)
+    try:
+        blue, artwork_hash = read_blue_artwork(args.artwork)
+    except ValueError as error:
+        parser.error(str(error))
     strokes = {loop: calibrated_strokes(blue, loop) for loop in REAL_TICKS}
 
     col_min, col_max = SOLID_CROSSING_COLUMNS
