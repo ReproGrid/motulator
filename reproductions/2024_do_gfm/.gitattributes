@@ -1,0 +1,7 @@
+# Preserve the byte streams recorded in the experiment manifests.
+*.py text eol=lf
+*.json text eol=lf
+reference/*.csv -text whitespace=cr-at-eol
+results/*.csv text eol=lf
+results/*.svg text eol=lf whitespace=-blank-at-eol
+results/*.png binary
