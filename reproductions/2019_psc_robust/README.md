@@ -9,7 +9,13 @@
 | 图注 | `(0.95, +0.20)` | `(0.20, −0.95)` | `1/3` |
 | 曲线反推 | `(0.95, −0.20)` | `(0.20, −0.95)` | `0.33` |
 
-按论文式 (8)，`iq0>0` 对应吸收无功，`iq0<0` 对应注入无功。另保留仅变号、仅调整 SCR=3 电感两个工况。组合工况和 Aalto 同行评审作者稿的 12 条 Nyquist 矢量轨迹逐条比对，最大 RMS 距离为 `1.48e−5 pu`。原始绘图输入和 IEEE 最终排版的 Fig. 5 尚未核对。[参数协议](configs/fig5_variants.json) · [对照 CSV](results/fig5_condition_comparison.csv) · [对照 JSON](results/fig5_condition_comparison.json) · [作者稿矢量核对](verification/fig5_vector_comparison.json)
+按论文式 (8)，`iq0>0` 对应吸收无功，`iq0<0` 对应注入无功。另保留仅变号、仅调整 SCR=3 电感两个工况。组合工况和 Aalto 同行评审作者稿的 12 条 Nyquist 矢量轨迹逐条比对，最大 RMS 距离为 `1.48e−5 pu`。原始绘图输入仍待确认。[参数协议](configs/fig5_variants.json) · [对照 CSV](results/fig5_condition_comparison.csv) · [对照 JSON](results/fig5_condition_comparison.json) · [作者稿矢量核对](verification/fig5_vector_comparison.json)
+
+## IEEE 最终出版版与勘误
+
+2026-11-11（UTC）检查了 IEEE Xplore 的第 8490668 号文章。公开记录可见，Figures 栏和 PDF 均需有权限的账号。最终版 Fig. 5 的图注和曲线尚未直接核实，当前符号结论对应 Aalto 同行评审作者稿。[IEEE Xplore 文章](https://ieeexplore.ieee.org/document/8490668) · [Figures 栏](https://ieeexplore.ieee.org/document/8490668/figures) · [作者稿 PDF](https://aaltodoc.aalto.fi/server/api/core/bitstreams/c8da5953-833c-4f32-b38b-49ea7add52b9/content)
+
+截至该日未查到公开登记的关联勘误。Crossref 的 DOI 记录没有关联更新，反查更新条目返回 0，Crossmark 未提供该 DOI 的状态数据。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
 
 ## 符号差异影响的结论
 
