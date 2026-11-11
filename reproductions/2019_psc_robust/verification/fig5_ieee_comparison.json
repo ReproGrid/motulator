@@ -1,0 +1,76 @@
+{
+  "doi": "10.1109/TIE.2018.2874584",
+  "figures_url": "https://ieeexplore.ieee.org/document/8490668/figures",
+  "artwork_url": "https://ieeexplore.ieee.org/mediastore/IEEE/content/media/41/8678530/8490668/harne5-2874584-large.gif",
+  "artwork_sha256": "a5bf260a6d22be44ea6c45542d128f884024d6acd377f28fcbd8159bc3558ca8",
+  "artwork_size_px": [
+    820,
+    766
+  ],
+  "upper_label_visual_reading_pu": [
+    0.95,
+    0.2
+  ],
+  "real_zero_and_minus_half_px": {
+    "gp": [
+      350.0,
+      257.5
+    ],
+    "gd": [
+      814.5,
+      721.5
+    ]
+  },
+  "imaginary_zero_and_minus_point_two_px": [
+    171.0,
+    208.5
+  ],
+  "interior_blue_pixel_count": {
+    "gp": 1818,
+    "gd": 1618
+  },
+  "upper_gd_scr10_solid_crossing": {
+    "row_px": 171,
+    "blue_columns_px": [
+      762,
+      763,
+      764,
+      765,
+      766,
+      767,
+      768
+    ],
+    "real_pu": -0.2661290322580645,
+    "gain_margin_estimate": 3.757575757575758
+  },
+  "upper_panel_comparisons": {
+    "figure_labels": {
+      "i_q0_pu": 0.2,
+      "rms_distance_pu": {
+        "gp": 0.037404565397790836,
+        "gd": 0.044112864462516985
+      }
+    },
+    "flip_upper_iq": {
+      "i_q0_pu": -0.2,
+      "rms_distance_pu": {
+        "gp": 0.005688202147246452,
+        "gd": 0.0051056011156206844
+      }
+    },
+    "round_scr3_inductance": {
+      "i_q0_pu": 0.2,
+      "rms_distance_pu": {
+        "gp": 0.037567879078806286,
+        "gd": 0.044054637608574795
+      }
+    },
+    "flip_upper_iq_and_round_scr3_inductance": {
+      "i_q0_pu": -0.2,
+      "rms_distance_pu": {
+        "gp": 0.005602143033747093,
+        "gd": 0.005095132420892676
+      }
+    }
+  }
+}
