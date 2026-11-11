@@ -15,6 +15,8 @@
 
 2026-11-11（UTC）核对了 IEEE Xplore 文章 8490668 的官方 Fig. 5 原图。**符号差异在出版版仍存在。** 两张上排子图都标 `(id0, iq0) = (0.95, +0.20) pu`，但蓝色轨迹整体更吻合 `iq0 = −0.20 pu`。上排直流侧 SCR=10 实线的负实轴交点读值约为 `−0.266 pu`，正号模型预测 `−0.334 pu`，负号模型预测 `−0.267 pu`。仅变号即可让两张上排子图的像素拟合 RMS 误差分别降低约 6.6 倍和 8.6 倍。[IEEE Xplore Figures](https://ieeexplore.ieee.org/document/8490668/figures) · [官方原图](https://ieeexplore.ieee.org/mediastore/IEEE/content/media/41/8678530/8490668/harne5-2874584-large.gif) · [出版版量取数据](verification/fig5_ieee_comparison.json)
 
+在 IEEE 最终版 PDF 的第 5 页（期刊印刷页 5814），四个子图的标注、线型和曲线与官网原图一致。按各子图刻度对齐后，GIF 蓝色像素到 PDF 矢量轨迹的 RMS 距离为 `0.0051–0.0056 pu`，约为一个 GIF 像素。PDF 上排直流侧 SCR=10 实线交点为 `−0.26663 pu`，进一步确认了符号差异。[PDF 与官网原图的对照数据](verification/fig5_ieee_pdf_comparison.json)
+
 截至该日未查到公开登记的关联勘误。Crossref 的 DOI 记录没有关联更新，反查返回 0 条，Crossmark 未提供该 DOI 的状态数据。[Crossref DOI 记录](https://api.crossref.org/works/10.1109/TIE.2018.2874584) · [反查更新](https://api.crossref.org/works?filter=updates%3A10.1109%2FTIE.2018.2874584&rows=0) · [Crossmark](https://crossmark.crossref.org/dialog/?doi=10.1109%2FTIE.2018.2874584)
 
 ## 符号差异影响的结论
@@ -72,4 +74,13 @@ printf '%s\n' "$out"
 ```sh
 "$py" "$case_dir/src/compare_fig5_ieee.py" \
   --artwork /path/to/harne5-2874584-large.gif --output "$run_dir/fig5-ieee-check.json"
+```
+
+如需复跑 PDF 与官网原图的对照，使用通过 IEEE Xplore 获得的最终版 PDF 和同一 GIF，另需上述 PyMuPDF 依赖。[PDF 对照脚本](src/compare_fig5_ieee_pdf.py)
+
+```sh
+"$py" "$case_dir/src/compare_fig5_ieee_pdf.py" \
+  --pdf /path/to/robust_psc2019_ieee.pdf \
+  --artwork /path/to/harne5-2874584-large.gif \
+  --output "$run_dir/fig5-ieee-pdf-check.json"
 ```
