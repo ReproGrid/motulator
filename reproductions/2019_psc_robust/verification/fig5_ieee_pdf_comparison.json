@@ -1,0 +1,69 @@
+{
+  "doi": "10.1109/TIE.2018.2874584",
+  "pdf_sha256": "e6ee61676269efa91c79977ee6fef4f9954c00877aed810a7d44017fefc12554",
+  "pdf_page_count": 10,
+  "pdf_page_one_based": 5,
+  "printed_page": 5814,
+  "artwork_url": "https://ieeexplore.ieee.org/mediastore/IEEE/content/media/41/8678530/8490668/harne5-2874584-large.gif",
+  "artwork_sha256": "a5bf260a6d22be44ea6c45542d128f884024d6acd377f28fcbd8159bc3558ca8",
+  "upper_row_label_visual_reading_pu": [
+    0.95,
+    0.2
+  ],
+  "pdf_trace_count": 12,
+  "pdf_real_zero_and_minus_half_pt": {
+    "gp": [
+      149.92801,
+      122.14001
+    ],
+    "gd": [
+      288.71201,
+      260.92401
+    ]
+  },
+  "pdf_imaginary_zero_and_minus_point_two_pt": {
+    "upper": [
+      117.79597,
+      128.91197
+    ],
+    "lower": [
+      234.063,
+      245.18001
+    ]
+  },
+  "artwork_imaginary_zero_and_minus_point_two_px": {
+    "upper": [
+      171.0,
+      208.5
+    ],
+    "lower": [
+      560.0,
+      597.5
+    ]
+  },
+  "vector_max_sample_spacing_pu": 0.0005,
+  "artwork_pixel_to_pdf_vector_by_panel": {
+    "upper_gp": {
+      "interior_artwork_pixels": 1818,
+      "rms_distance_pu": 0.005604809498383116,
+      "max_distance_pu": 0.014977937874588723
+    },
+    "upper_gd": {
+      "interior_artwork_pixels": 1618,
+      "rms_distance_pu": 0.005109259714331428,
+      "max_distance_pu": 0.010909838957066422
+    },
+    "lower_gp": {
+      "interior_artwork_pixels": 1736,
+      "rms_distance_pu": 0.005464524954700718,
+      "max_distance_pu": 0.013320800966237724
+    },
+    "lower_gd": {
+      "interior_artwork_pixels": 1745,
+      "rms_distance_pu": 0.005169307043269671,
+      "max_distance_pu": 0.012625358529087331
+    }
+  },
+  "upper_gd_scr10_pdf_crossing_pu": -0.2666280587681411,
+  "upper_gd_scr10_pdf_gain_margin": 3.750543002188666
+}
